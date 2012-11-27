@@ -43,6 +43,10 @@ To run the acceptance suite
     $> sudo npm install -g mocha
     $> make test
 
+To run the casper suite
+
+    $> make casper_specs
+
 Deployment
 ==========
 Add heroku to your git remotes once
