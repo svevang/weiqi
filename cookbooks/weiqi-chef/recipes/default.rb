@@ -18,6 +18,9 @@ package "vim"
 package "curl"
 package "ack-grep"
 package "mongodb-server"
+package "default-jre"
+package "chromium-browser"
+package "supervisor"
 
 bash "install nvm" do
   user "vagrant"
@@ -44,3 +47,22 @@ bash "use 0.10 node by default" do
   not_if "grep 'nvm use 0.10' /home/vagrant/.bashrc"
 end
 
+# setup selenium and webdriver
+
+bash "download the standalone selenium server" do
+  user "vagrant"
+  cwd "/home/vagrant"
+  code "curl -O http://selenium-release.storage.googleapis.com/2.43/selenium-server-standalone-2.43.1.jar"
+  not_if "test -e selenium-server-standalone*.jar"
+end
+
+template "/etc/supervisor/conf.d/supervisor_selenium.conf" do
+  source "supervisor_selenium.conf.erb"
+  mode '0644'
+  owner 'root'
+  group 'root'
+end
+
+service "supervisor" do
+  action :restart
+end
