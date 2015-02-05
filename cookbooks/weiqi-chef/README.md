@@ -1,27 +1,21 @@
 # weiqi-chef-cookbook
 
-TODO: Enter the cookbook description here.
+This is a vagrant-chef setup used to bootstrap weiqi for development.
+Included is a selenium stand alone server that is managed by a
+supervisor process.
+
+## Testing
+
+Make sure you have ChefDK installed and run `kitchen test`
 
 ## Supported Platforms
 
-TODO: List your supported platforms.
+Ubuntu 14.04
 
 ## Attributes
 
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['weiqi-chef']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
+None yet, but a possible TODO is the download url for selenium could be
+pulled out here.
 
 ## Usage
 
@@ -39,4 +33,4 @@ Include `weiqi-chef` in your node's `run_list`:
 
 ## License and Authors
 
-Author:: YOUR_NAME (<YOUR_EMAIL>)
+Author:: Sam Vevang <sam.vevang@gmail.com>
