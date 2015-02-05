@@ -28,6 +28,7 @@
   "devDependencies": {
     "node-inspector": "latest",
     "mocha": "latest",
+    "chai-as-promised": "latest",
     "jasmine-node": "latest",
     "zombie": "latest"
   }

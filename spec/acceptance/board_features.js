@@ -1,3 +1,39 @@
+var chai = require("chai");
+// adds `eventually` for wrapping promise style chains in expect
+var chaiAsPromised = require("chai-as-promised");
+chai.use(chaiAsPromised);
+var assert = chai.assert;
+var expect = chai.expect;
+var should = chai.should;
+
+var webdriverio = require('webdriverio');
+var options = {
+    desiredCapabilities: {
+        browserName: 'chromium'
+    }
+};
+
+var client;
+
+describe('Weiqi', function(){
+
+  before(function(done){
+    client = webdriverio.remote(options).init().url('http://localhost:3000')
+    client.then(function(){ done(); })
+  });
+
+  it('should display right title', function() {
+    return expect(client.getTitle()).eventually.to.equal('weiqi');
+  });
+
+  after(function(){
+    return client.end();
+  })
+
+})
+
+
+/*
 Zombie = require('zombie');
 assert = require('assert');
 
@@ -320,4 +356,4 @@ describe("Boards", function() {
   });
 });
 
-
+*/
