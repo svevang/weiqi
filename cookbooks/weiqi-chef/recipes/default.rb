@@ -37,14 +37,14 @@ end
 
 bash "install node versions" do
   user "vagrant"
-  code "source /home/vagrant/.nvm/nvm.sh && nvm install 0.10.36"
-  not_if "source /home/vagrant/.nvm/nvm.sh && nvm list | grep 0.10.36"
+  code "source /home/vagrant/.nvm/nvm.sh && nvm install #{node[:weiqi][:nodejs_version]}"
+  not_if "source /home/vagrant/.nvm/nvm.sh && nvm list | grep #{node[:weiqi][:nodejs_version]}"
 end
 
-bash "use 0.10 node by default" do
+bash "use node by default" do
   user "vagrant"
-  code "echo 'nvm use 0.10.36' >> /home/vagrant/.bashrc"
-  not_if "grep 'nvm use 0.10.36' /home/vagrant/.bashrc"
+  code "echo 'nvm use #{node[:weiqi][:nodejs_version]}' >> /home/vagrant/.bashrc"
+  not_if "grep 'nvm use #{node[:weiqi][:nodejs_version]}' /home/vagrant/.bashrc"
 end
 
 # setup selenium and webdriver
@@ -52,7 +52,7 @@ end
 bash "install mocha" do
   user "vagrant"
   # XXX break out version here into attribute
-  code "/home/vagrant/.nvm/v0.10.36/bin/npm install -g mocha"
+  code "/home/vagrant/.nvm/v#{node[:weiqi][:nodejs_version]}/bin/npm install -g mocha"
 end
 
 bash "download the standalone selenium server" do
