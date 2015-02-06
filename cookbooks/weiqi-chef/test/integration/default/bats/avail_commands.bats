@@ -1,7 +1,8 @@
 #!/usr/bin/env bats
 
 @test "mocha binary is found in PATH" {
-  run bash -c "find ~/.nvm | grep bin\/mocha"
-  [ "$status" -eq 0 ]
+  run sudo bash -i -l -c "node --version"
+  # it's the second line of output after the nvm "using version" notice
+  [ "${lines[1]}" = "v0.10.36" ]
 }
 

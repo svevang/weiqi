@@ -29,29 +29,29 @@ bash "install nvm" do
   not_if "test -e /home/vagrant/.nvm/nvm.sh"
 end
 
-bash "setup nvm for interactive shells" do
-  user "vagrant"
-  code "echo 'source /home/vagrant/.nvm/nvm.sh' >> /home/vagrant/.bashrc"
-  not_if "grep nvm.sh /home/vagrant/.bashrc"
-end
-
 bash "install node versions" do
   user "vagrant"
   code "source /home/vagrant/.nvm/nvm.sh && nvm install #{node[:weiqi][:nodejs_version]}"
   not_if "source /home/vagrant/.nvm/nvm.sh && nvm list | grep #{node[:weiqi][:nodejs_version]}"
 end
 
-bash "use node by default" do
+bash "use vagrant's interactive env" do
   user "vagrant"
-  code "echo 'nvm use #{node[:weiqi][:nodejs_version]}' >> /home/vagrant/.bashrc"
-  not_if "grep 'nvm use #{node[:weiqi][:nodejs_version]}' /home/vagrant/.bashrc"
+  code "echo 'source ~/interactive_config.sh' >> /home/vagrant/.bashrc"
+  not_if "grep 'interactive_config.sh' /home/vagrant/.bashrc"
+end
+
+template "/home/vagrant/interactive_config.sh" do
+  source "interactive_config.sh.erb"
+  mode '0644'
+  owner 'vagrant'
+  group 'vagrant'
 end
 
 # setup selenium and webdriver
 
 bash "install mocha" do
   user "vagrant"
-  # XXX break out version here into attribute
   code "/home/vagrant/.nvm/v#{node[:weiqi][:nodejs_version]}/bin/npm install -g mocha"
 end
 
