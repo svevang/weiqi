@@ -5,10 +5,10 @@ block container
     .start
       form(method="post", action="/boards")
         input(type="hidden", name="board_size", value=9)
-        input(type="submit", value="start a small game")
+        input(id="small-game-button", type="submit", value="start a small game")
  
       h1 Weiqi
 
       form(method="post", action="/boards")
         input(type="hidden", name="board_size", value=19)
-        input(type="submit", value="start a big game")
+        input(id="big-game-button", type="submit", value="start a big game")

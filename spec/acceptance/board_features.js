@@ -5,6 +5,7 @@ chai.use(chaiAsPromised);
 var assert = chai.assert;
 var expect = chai.expect;
 var should = chai.should;
+var Q = require('q');
 
 var webdriverio = require('webdriverio');
 var options = {
@@ -23,7 +24,11 @@ describe('Weiqi', function(){
   });
 
   it('should display right title', function() {
-    return expect(client.getTitle()).eventually.to.equal('weiqi');
+
+    return Q.all([
+      expect(client.getTitle()).eventually.to.equal('weiqi'),
+      expect(client.waitForText('.start')).eventually.to.equal('start a big game')
+    ]);
   });
 
   after(function(){
